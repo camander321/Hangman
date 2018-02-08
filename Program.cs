@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace //ENTER NAMESPACE
+namespace Hangman
 {
     public class Program
     {
