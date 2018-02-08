@@ -38,6 +38,13 @@ namespace Hangman.Models
         return;
       }
 
+      if (_triedLetters.Contains(guess))
+      {
+        return;
+      }
+
+      _triedLetters += guess + " ";
+
       bool guessCorrect = false;
       for (int i = 0; i < _word.Length; i++)
       {
@@ -56,7 +63,6 @@ namespace Hangman.Models
       if (!guessCorrect)
       {
         _tries--;
-        _triedLetters += guess + " ";
         if (_tries == 0)
         {
           _lose = true;
