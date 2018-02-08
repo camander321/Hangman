@@ -70,6 +70,11 @@ namespace Hangman.Models
       }
     }
 
+    public string GetWord()
+    {
+      return _word;
+    }
+
     public string GetShownWord()
     {
       return _shownWord;

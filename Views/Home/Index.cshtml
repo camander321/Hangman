@@ -3,24 +3,8 @@
 }
 
 <div class="jumbotron">
-  <div class="row">
-    <div class="col-md-3">
-      @{
-        var path = @"/img/man_" + @Model["tries"] + ".png";
-      }
-      <img src="@path" alt="Hanged Man">
-    </div>
-    <div class="col-md-9">
-      <h3>@Model["word"]</h3>
-      <h4>Tries Remaining: @Model["tries"]</h4>
-      <h4>Tried Letters: @Model["triedLetters"]</h4>
-    </div>
-  </div>
-  <div class="row">
-    <form class="" action="/" method="post">
-      <input type="text" name="guess" placeholder="Enter a letter">
-      <button type="submit" name="button">Guess</button>
-    </form>
-  </div>
-
+  <form action="/game" method="get">
+    <input type="text" name="newWord" placeholder="Enter a super secret word">
+    <button type="submit" class="btn btn-info" name="button">GO!</button>
+  </form>
 </div>

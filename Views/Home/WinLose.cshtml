@@ -2,6 +2,9 @@
  Layout = "_Layout";
 }
 
-<div>
-  <h1>@Model</h1>
+<div class="jumbotron">
+  <h1>@Model["msg"]</h1>
+  <h2>The Word Was: @Model["word"]</h2>
+
+  <a href="/">start over</a>
 </div>

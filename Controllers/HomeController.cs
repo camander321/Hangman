@@ -7,18 +7,24 @@ namespace Hangman.Controllers
   public class HomeController : Controller
   {
     [HttpGet("/")]
+    public ActionResult Index()
+    {
+      return View("Index");
+    }
+
+    [HttpGet("/game")]
     public ActionResult Hangman()
     {
-      Words newWord = new Words ("cheese");
+      Words newWord = new Words (Request.Query["newWord"]);
       Dictionary<string, object> model = new Dictionary<string, object>();
       model.Add("word", newWord.GetShownWord());
       model.Add("tries", newWord.GetTries());
       model.Add("triedLetters", newWord.GetTriedLetters());
 
-      return View("Index", model);
+      return View("Game", model);
     }
 
-    [HttpPost("/")]
+    [HttpPost("/game")]
     public ActionResult Guess()
     {
       Words newWord = Words.GetInstance();
@@ -29,19 +35,25 @@ namespace Hangman.Controllers
       }
 
       Dictionary<string, object> model = new Dictionary<string, object>();
-      model.Add("word", newWord.GetShownWord());
-      model.Add("tries", newWord.GetTries());
-      model.Add("triedLetters", newWord.GetTriedLetters());
       if (newWord.GetWin())
       {
-        return View ("WinLose", "Congratulations you win!");
+        model.Add("msg", "Congratulations you win!");
+        model.Add("word", newWord.GetWord());
+        return View ("WinLose", model);
       }
       if (newWord.GetLose())
       {
-        return View ("WinLose", "No congratulations. You lose!");
+        model.Add("msg", "No congratulations. You lose!");
+        model.Add("word", newWord.GetWord());
+        return View ("WinLose", model);
       }
 
-      return View("Index", model);
+      model.Add("word", newWord.GetShownWord());
+      model.Add("tries", newWord.GetTries());
+      model.Add("triedLetters", newWord.GetTriedLetters());
+
+
+      return View("Game", model);
     }
   }
 }
